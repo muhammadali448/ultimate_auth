@@ -125,7 +125,7 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
   email: String;
-  password: String;
+  password?: Maybe<String>;
   isAdmin?: Maybe<Boolean>;
   resetPasswordLink?: Maybe<String>;
 }
@@ -281,9 +281,9 @@ export interface UserPreviousValues {
   id: ID_Output;
   name: String;
   email: String;
-  password: String;
-  isAdmin: Boolean;
-  resetPasswordLink: String;
+  password?: String;
+  isAdmin?: Boolean;
+  resetPasswordLink?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -398,9 +398,9 @@ export interface User {
   id: ID_Output;
   name: String;
   email: String;
-  password: String;
-  isAdmin: Boolean;
-  resetPasswordLink: String;
+  password?: String;
+  isAdmin?: Boolean;
+  resetPasswordLink?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }

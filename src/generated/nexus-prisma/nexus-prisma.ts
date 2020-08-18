@@ -190,7 +190,7 @@ export interface UserFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   isAdmin: {
@@ -198,7 +198,7 @@ export interface UserFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   resetPasswordLink: {
@@ -206,7 +206,7 @@ export interface UserFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   createdAt: {
@@ -711,7 +711,7 @@ export interface UserPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   isAdmin: {
@@ -719,7 +719,7 @@ export interface UserPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   resetPasswordLink: {
@@ -727,7 +727,7 @@ export interface UserPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: false
+    nullable: true
     resolve: undefined
   }
   createdAt: {
@@ -950,7 +950,7 @@ export interface UserCreateInput {
   id?: string | null
   name?: string
   email?: string
-  password?: string
+  password?: string | null
   isAdmin?: boolean | null
   resetPasswordLink?: string | null
 }

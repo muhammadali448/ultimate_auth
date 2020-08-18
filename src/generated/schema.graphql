@@ -2,42 +2,14 @@
 ### Do not make changes to this file directly
 
 
+type ActivationPayload {
+  message: String!
+}
+
 type AuthPayload {
   token: String!
   user: User!
 }
-
-type Comment {
-  author: User!
-  createdAt: DateTime!
-  id: ID!
-  post: Post!
-  text: String!
-  updatedAt: DateTime!
-}
-
-enum CommentOrderByInput {
-  createdAt_ASC
-  createdAt_DESC
-  text_ASC
-  text_DESC
-}
-
-type CommentSubscriptionPayload {
-  mutation: MutationType!
-  node: Comment
-}
-
-input createCommentInput {
-  text: String!
-}
-
-input createPostInput {
-  content: String!
-  title: String!
-}
-
-scalar DateTime
 
 input loginInput {
   email: String!
@@ -45,46 +17,14 @@ input loginInput {
 }
 
 type Mutation {
-  createComment(createCommentInput: createCommentInput!, postId: ID!): Comment!
-  createPost(createPostInput: createPostInput!): Post!
-  deleteComment(id: ID!): Comment!
-  deletePost(id: ID!): Post!
-  deleteUser(id: ID!): User!
+  accountActivation(token: String!): ActivationPayload!
   login(loginInput: loginInput!): AuthPayload!
-  signup(signupInput: signupInput!): AuthPayload!
-  updateComment(id: ID!, updateCommentInput: updateCommentInput!): Comment!
-  updatePost(id: ID!, updatePostInput: updatePostInput!): Post!
-  updateUser(updateUserInput: updateUserInput!): User!
-}
-
-enum MutationType {
-  CREATED
-  DELETED
-  UPDATED
-}
-
-type Post {
-  author: User!
-  comments: [Comment!]
-  content: String
-  createdAt: DateTime!
-  id: ID!
-  isPublished: Boolean!
-  title: String!
-}
-
-type PostSubscriptionPayload {
-  mutation: MutationType!
-  node: Post
+  signup(signupInput: signupInput!): ActivationPayload!
 }
 
 type Query {
-  allComments(orderBy: CommentOrderByInput): [Comment!]!
-  allPosts(searchString: String): [Post!]!
   allUsers(searchNameString: String): [User!]!
-  myPosts(searchString: String): [Post!]!
   myProfile: User!
-  postById(id: ID!): Post!
 }
 
 input signupInput {
@@ -93,37 +33,8 @@ input signupInput {
   password: String!
 }
 
-type Subscription {
-  """
-  Listen when a comment is created, deleted or updated for a particular post
-  """
-  comments(id: ID!): CommentSubscriptionPayload!
-
-  """Listen when a post is created, deleted or updated"""
-  posts: PostSubscriptionPayload!
-}
-
-input updateCommentInput {
-  text: String
-}
-
-input updatePostInput {
-  content: String
-  isPublished: Boolean
-  title: String
-}
-
-input updateUserInput {
-  email: String
-  name: String
-  password: String
-}
-
 type User {
-  comments: [Comment!]
   email: String!
   id: ID!
   name: String!
-  password: String!
-  posts: [Post!]
 }

@@ -55,9 +55,9 @@ type User {
   id: ID!
   name: String!
   email: String!
-  password: String!
-  isAdmin: Boolean!
-  resetPasswordLink: String!
+  password: String
+  isAdmin: Boolean
+  resetPasswordLink: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -72,7 +72,7 @@ input UserCreateInput {
   id: ID
   name: String!
   email: String!
-  password: String!
+  password: String
   isAdmin: Boolean
   resetPasswordLink: String
 }
@@ -105,9 +105,9 @@ type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
-  password: String!
-  isAdmin: Boolean!
-  resetPasswordLink: String!
+  password: String
+  isAdmin: Boolean
+  resetPasswordLink: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }

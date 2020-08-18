@@ -2,9 +2,9 @@ type User {
   id: ID! @id
   name: String!
   email: String! @unique
-  password: String!
-  isAdmin: Boolean! @default(value: false)
-  resetPasswordLink: String! @default(value: "")
+  password: String
+  isAdmin: Boolean @default(value: false)
+  resetPasswordLink: String @default(value: "")
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
