@@ -6,6 +6,7 @@ import {
   signupInput,
   loginInput,
   ActivationPayload,
+  resetPasswordInput,
 } from "./Auth";
 export const resolvers = {
   Query,
@@ -14,5 +15,6 @@ export const resolvers = {
   AuthPayload,
   ActivationPayload,
   signupInput,
+  resetPasswordInput,
   loginInput,
 };

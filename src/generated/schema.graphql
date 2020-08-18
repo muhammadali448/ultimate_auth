@@ -18,13 +18,20 @@ input loginInput {
 
 type Mutation {
   accountActivation(token: String!): ActivationPayload!
+  forgotPassword(email: String!): ActivationPayload!
   login(loginInput: loginInput!): AuthPayload!
+  resetPassword(resetPasswordInput: resetPasswordInput!): ActivationPayload!
   signup(signupInput: signupInput!): ActivationPayload!
 }
 
 type Query {
   allUsers(searchNameString: String): [User!]!
   myProfile: User!
+}
+
+input resetPasswordInput {
+  newPassword: String!
+  resetPasswordLink: String!
 }
 
 input signupInput {

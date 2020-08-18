@@ -15,6 +15,10 @@ export interface NexusGenInputs {
     email: string; // String!
     password: string; // String!
   }
+  resetPasswordInput: { // input type
+    newPassword: string; // String!
+    resetPasswordLink: string; // String!
+  }
   signupInput: { // input type
     email: string; // String!
     name: string; // String!
@@ -49,6 +53,7 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   loginInput: NexusGenInputs['loginInput'];
+  resetPasswordInput: NexusGenInputs['resetPasswordInput'];
   signupInput: NexusGenInputs['signupInput'];
 }
 
@@ -62,7 +67,9 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     accountActivation: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
+    forgotPassword: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    resetPassword: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
     signup: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
   }
   Query: { // field return type
@@ -81,8 +88,14 @@ export interface NexusGenArgTypes {
     accountActivation: { // args
       token: string; // String!
     }
+    forgotPassword: { // args
+      email: string; // String!
+    }
     login: { // args
       loginInput: NexusGenInputs['loginInput']; // loginInput!
+    }
+    resetPassword: { // args
+      resetPasswordInput: NexusGenInputs['resetPasswordInput']; // resetPasswordInput!
     }
     signup: { // args
       signupInput: NexusGenInputs['signupInput']; // signupInput!
@@ -102,7 +115,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "ActivationPayload" | "AuthPayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "loginInput" | "signupInput";
+export type NexusGenInputNames = "loginInput" | "resetPasswordInput" | "signupInput";
 
 export type NexusGenEnumNames = never;
 

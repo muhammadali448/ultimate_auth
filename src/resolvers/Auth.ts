@@ -8,6 +8,14 @@ export const signupInput = inputObjectType({
   },
 });
 
+export const resetPasswordInput = inputObjectType({
+  name: "resetPasswordInput",
+  definition(t) {
+    t.string("resetPasswordLink", { nullable: false });
+    t.string("newPassword", { nullable: false });
+  },
+});
+
 export const loginInput = inputObjectType({
   name: "loginInput",
   definition(t) {
