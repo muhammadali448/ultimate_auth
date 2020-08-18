@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/ali-test
+    steps:
+      - checkout
+
+      - run:
+          name: Install Node Version Manager
+          command: |
+            curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+            export NVM_DIR="/opt/circleci/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+            nvm install v10.22.0
+            nvm alias default v10.22.0
+            echo 'export NVM_DIR="/opt/circleci/.nvm"' >> $BASH_ENV
+            echo "[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"" >> $BASH_ENV
+      - run:
+          name: Start prisma server
+          working_directory: .
+          environment:
+            PRISMA_ENDPOINT: http://localhost:4466/ultimate-auth/test
+            PRISMA_SECRET: chai-peelov2
+            JWT_SECRET: createUserToken
+          command: |
+            npm install
+            docker-compose -f docker-compose.yml up -d
+            cd prisma
+            sleep 20
+            npx prisma deploy
+      - run:
+          name: Jest test
+          working_directory: .
+          environment:
+            PRISMA_ENDPOINT: http://localhost:4466/ultimate-auth/test
+            PRISMA_SECRET: chai-peelov2
+            JWT_SECRET: createUserToken
+          command: |
+            npm run test
+            no_output_timeout: 5m
