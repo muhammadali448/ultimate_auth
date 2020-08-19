@@ -26,6 +26,7 @@ type Mutation {
 }
 
 type Query {
+  allUsers(searchNameString: String): [User!]!
   currentUser: User!
 }
 

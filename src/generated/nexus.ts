@@ -81,6 +81,7 @@ export interface NexusGenFieldTypes {
     updateUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
+    allUsers: NexusGenRootTypes['User'][]; // [User!]!
     currentUser: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
@@ -110,6 +111,11 @@ export interface NexusGenArgTypes {
     }
     updateUser: { // args
       updateUserInput: NexusGenInputs['UpdateUserInput']; // UpdateUserInput!
+    }
+  }
+  Query: {
+    allUsers: { // args
+      searchNameString?: string | null; // String
     }
   }
 }
