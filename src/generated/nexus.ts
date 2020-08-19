@@ -11,6 +11,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  DeleteUserInput: { // input type
+    id: string[]; // [ID!]!
+  }
   UpdateUserInput: { // input type
     email?: string | null; // String
     name?: string | null; // String
@@ -35,12 +38,12 @@ export interface NexusGenEnums {
 }
 
 export interface NexusGenRootTypes {
-  ActivationPayload: { // root type
-    message: string; // String!
-  }
   AuthPayload: { // root type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
+  }
+  MessagePayload: { // root type
+    message: string; // String!
   }
   Mutation: {};
   Query: {};
@@ -58,6 +61,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  DeleteUserInput: NexusGenInputs['DeleteUserInput'];
   UpdateUserInput: NexusGenInputs['UpdateUserInput'];
   loginInput: NexusGenInputs['loginInput'];
   resetPasswordInput: NexusGenInputs['resetPasswordInput'];
@@ -65,19 +69,20 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 }
 
 export interface NexusGenFieldTypes {
-  ActivationPayload: { // field return type
-    message: string; // String!
-  }
   AuthPayload: { // field return type
     token: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
+  MessagePayload: { // field return type
+    message: string; // String!
+  }
   Mutation: { // field return type
-    accountActivation: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
-    forgotPassword: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
+    accountActivation: NexusGenRootTypes['MessagePayload']; // MessagePayload!
+    deleteUsers: NexusGenRootTypes['MessagePayload']; // MessagePayload!
+    forgotPassword: NexusGenRootTypes['MessagePayload']; // MessagePayload!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
-    resetPassword: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
-    signup: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
+    resetPassword: NexusGenRootTypes['MessagePayload']; // MessagePayload!
+    signup: NexusGenRootTypes['MessagePayload']; // MessagePayload!
     updateUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
@@ -96,6 +101,9 @@ export interface NexusGenArgTypes {
   Mutation: {
     accountActivation: { // args
       token: string; // String!
+    }
+    deleteUsers: { // args
+      ids: NexusGenInputs['DeleteUserInput']; // DeleteUserInput!
     }
     forgotPassword: { // args
       email: string; // String!
@@ -125,9 +133,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "ActivationPayload" | "AuthPayload" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "AuthPayload" | "MessagePayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "UpdateUserInput" | "loginInput" | "resetPasswordInput" | "signupInput";
+export type NexusGenInputNames = "DeleteUserInput" | "UpdateUserInput" | "loginInput" | "resetPasswordInput" | "signupInput";
 
 export type NexusGenEnumNames = never;
 

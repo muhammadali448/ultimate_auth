@@ -33,8 +33,15 @@ export const updateUserInput = inputObjectType({
   },
 });
 
-export const ActivationPayload = objectType({
-  name: "ActivationPayload",
+export const deleteUserInput = inputObjectType({
+  name: "DeleteUserInput",
+  definition(t) {
+    t.list.id("id", { required: true });
+  },
+});
+
+export const messagePayload = objectType({
+  name: "MessagePayload",
   definition(t) {
     t.string("message", { nullable: false });
   },

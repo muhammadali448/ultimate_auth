@@ -20,5 +20,6 @@ export const middlewares = shield({
   Query: {
     currentUser: rules.isAuthenticatedUser,
     allUsers: and(rules.isAuthenticatedUser, rules.isAdmin),
+    deleteUsers: and(rules.isAuthenticatedUser, rules.isAdmin),
   },
 });

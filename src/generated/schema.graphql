@@ -2,13 +2,13 @@
 ### Do not make changes to this file directly
 
 
-type ActivationPayload {
-  message: String!
-}
-
 type AuthPayload {
   token: String!
   user: User!
+}
+
+input DeleteUserInput {
+  id: [ID!]!
 }
 
 input loginInput {
@@ -16,12 +16,17 @@ input loginInput {
   password: String!
 }
 
+type MessagePayload {
+  message: String!
+}
+
 type Mutation {
-  accountActivation(token: String!): ActivationPayload!
-  forgotPassword(email: String!): ActivationPayload!
+  accountActivation(token: String!): MessagePayload!
+  deleteUsers(ids: DeleteUserInput!): MessagePayload!
+  forgotPassword(email: String!): MessagePayload!
   login(loginInput: loginInput!): AuthPayload!
-  resetPassword(resetPasswordInput: resetPasswordInput!): ActivationPayload!
-  signup(signupInput: signupInput!): ActivationPayload!
+  resetPassword(resetPasswordInput: resetPasswordInput!): MessagePayload!
+  signup(signupInput: signupInput!): MessagePayload!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 

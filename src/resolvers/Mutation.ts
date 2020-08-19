@@ -1,16 +1,15 @@
-import { mutationType, arg, stringArg } from "nexus";
+import { mutationType, arg, stringArg, idArg } from "nexus";
 import generateHashPassword from "../utils/generateHashPassword";
 import generateToken from "../utils/generateToken";
 import mailService from "../services/sendEmail";
 import { compare } from "bcrypt";
 import { sign, decode, verify } from "jsonwebtoken";
-import { resolve } from "dns";
 import { getUserId } from "../utils/getUserId";
 
 export const Mutation = mutationType({
   definition(t) {
     t.field("signup", {
-      type: "ActivationPayload",
+      type: "MessagePayload",
       nullable: false,
       args: {
         signupInput: arg({ type: "signupInput", required: true }),
@@ -49,7 +48,7 @@ export const Mutation = mutationType({
       },
     });
     t.field("accountActivation", {
-      type: "ActivationPayload",
+      type: "MessagePayload",
       nullable: false,
       args: {
         token: stringArg({ required: true }),
@@ -82,7 +81,7 @@ export const Mutation = mutationType({
       },
     });
     t.field("resetPassword", {
-      type: "ActivationPayload",
+      type: "MessagePayload",
       nullable: false,
       args: {
         resetPasswordInput: arg({
@@ -133,7 +132,7 @@ export const Mutation = mutationType({
       },
     });
     t.field("forgotPassword", {
-      type: "ActivationPayload",
+      type: "MessagePayload",
       nullable: false,
       args: {
         email: stringArg({ required: true }),
@@ -216,6 +215,21 @@ export const Mutation = mutationType({
           data,
         });
         return updateUser;
+      },
+    });
+    t.field("deleteUsers", {
+      type: "MessagePayload",
+      nullable: false,
+      args: {
+        ids: arg({ type: "DeleteUserInput", required: true }),
+      },
+      resolve: async (parent, { ids }, ctx) => {
+        await ctx.prisma.deleteManyUsers({
+          id_in: ids.id,
+        });
+        return {
+          message: "Delete users successfully",
+        };
       },
     });
     t.field("login", {
