@@ -22,11 +22,11 @@ type Mutation {
   login(loginInput: loginInput!): AuthPayload!
   resetPassword(resetPasswordInput: resetPasswordInput!): ActivationPayload!
   signup(signupInput: signupInput!): ActivationPayload!
+  updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
 type Query {
-  allUsers(searchNameString: String): [User!]!
-  myProfile: User!
+  currentUser: User!
 }
 
 input resetPasswordInput {
@@ -40,8 +40,15 @@ input signupInput {
   password: String!
 }
 
+input UpdateUserInput {
+  email: String
+  name: String
+  password: String
+}
+
 type User {
   email: String!
   id: ID!
+  isAdmin: Boolean
   name: String!
 }

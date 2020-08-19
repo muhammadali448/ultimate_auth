@@ -5,6 +5,7 @@ import {
   AuthPayload,
   signupInput,
   loginInput,
+  updateUserInput,
   ActivationPayload,
   resetPasswordInput,
 } from "./Auth";
@@ -17,4 +18,5 @@ export const resolvers = {
   signupInput,
   resetPasswordInput,
   loginInput,
+  updateUserInput,
 };

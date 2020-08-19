@@ -24,6 +24,15 @@ export const loginInput = inputObjectType({
   },
 });
 
+export const updateUserInput = inputObjectType({
+  name: "UpdateUserInput",
+  definition(t) {
+    t.string("email");
+    t.string("password");
+    t.string("name");
+  },
+});
+
 export const ActivationPayload = objectType({
   name: "ActivationPayload",
   definition(t) {

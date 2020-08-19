@@ -4,6 +4,8 @@ import generateToken from "../utils/generateToken";
 import mailService from "../services/sendEmail";
 import { compare } from "bcrypt";
 import { sign, decode, verify } from "jsonwebtoken";
+import { resolve } from "dns";
+import { getUserId } from "../utils/getUserId";
 
 export const Mutation = mutationType({
   definition(t) {
@@ -175,6 +177,45 @@ export const Mutation = mutationType({
         } catch (error) {
           throw new Error(error.message);
         }
+      },
+    });
+    t.field("updateUser", {
+      type: "User",
+      nullable: false,
+      args: {
+        updateUserInput: arg({ type: "UpdateUserInput", required: true }),
+      },
+      resolve: async (
+        _,
+        { updateUserInput: { name, password, email } },
+        ctx
+      ) => {
+        const userId = getUserId(ctx);
+        if (!name && !password && !email) {
+          throw new Error("No Field to update");
+        }
+        interface DataType {
+          name?: string;
+          email?: string;
+          password: string;
+        }
+        const data = {} as DataType;
+        if (name) {
+          data.name = name;
+        }
+        if (email) {
+          data.email = email;
+        }
+        if (password) {
+          data.password = await generateHashPassword(password);
+        }
+        const updateUser = await ctx.prisma.updateUser({
+          where: {
+            id: userId,
+          },
+          data,
+        });
+        return updateUser;
       },
     });
     t.field("login", {

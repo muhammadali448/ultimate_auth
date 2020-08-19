@@ -11,6 +11,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  UpdateUserInput: { // input type
+    email?: string | null; // String
+    name?: string | null; // String
+    password?: string | null; // String
+  }
   loginInput: { // input type
     email: string; // String!
     password: string; // String!
@@ -42,6 +47,7 @@ export interface NexusGenRootTypes {
   User: { // root type
     email: string; // String!
     id: string; // ID!
+    isAdmin?: boolean | null; // Boolean
     name: string; // String!
   }
   String: string;
@@ -52,6 +58,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  UpdateUserInput: NexusGenInputs['UpdateUserInput'];
   loginInput: NexusGenInputs['loginInput'];
   resetPasswordInput: NexusGenInputs['resetPasswordInput'];
   signupInput: NexusGenInputs['signupInput'];
@@ -71,14 +78,15 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     resetPassword: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
     signup: NexusGenRootTypes['ActivationPayload']; // ActivationPayload!
+    updateUser: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
-    allUsers: NexusGenRootTypes['User'][]; // [User!]!
-    myProfile: NexusGenRootTypes['User']; // User!
+    currentUser: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
     email: string; // String!
     id: string; // ID!
+    isAdmin: boolean | null; // Boolean
     name: string; // String!
   }
 }
@@ -100,10 +108,8 @@ export interface NexusGenArgTypes {
     signup: { // args
       signupInput: NexusGenInputs['signupInput']; // signupInput!
     }
-  }
-  Query: {
-    allUsers: { // args
-      searchNameString?: string | null; // String
+    updateUser: { // args
+      updateUserInput: NexusGenInputs['UpdateUserInput']; // UpdateUserInput!
     }
   }
 }
@@ -115,7 +121,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "ActivationPayload" | "AuthPayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "loginInput" | "resetPasswordInput" | "signupInput";
+export type NexusGenInputNames = "UpdateUserInput" | "loginInput" | "resetPasswordInput" | "signupInput";
 
 export type NexusGenEnumNames = never;
 

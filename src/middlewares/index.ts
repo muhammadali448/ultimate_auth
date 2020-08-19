@@ -10,6 +10,6 @@ const rules = {
 
 export const middlewares = shield({
   Query: {
-    myProfile: rules.isAuthenticatedUser,
+    currentUser: rules.isAuthenticatedUser,
   },
 });
