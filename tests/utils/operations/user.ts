@@ -38,9 +38,9 @@ const getUsersError = gql`
     }
   }
 `;
-const getProfile = gql`
+const currentUser = gql`
   query {
-    createUser {
+    currentUser {
       id
       name
       email
@@ -51,14 +51,14 @@ const getProfile = gql`
 
 const deleteUsers = gql`
   mutation($ids: DeleteUserInput!) {
-    deleteUser(ids: $ids) {
+    deleteUsers(ids: $ids) {
       message
     }
   }
 `;
 
 const updateUser = gql`
-  mutation($data: updateUserInput!) {
+  mutation($data: UpdateUserInput!) {
     updateUser(updateUserInput: $data) {
       id
       name
@@ -69,8 +69,8 @@ const updateUser = gql`
 `;
 
 const accountActivation = gql`
-  mutation {
-    accountActivation(token: String!) {
+  mutation($token: String!) {
+    accountActivation(token: $token) {
       message
     }
   }
@@ -78,10 +78,11 @@ const accountActivation = gql`
 
 export {
   createUser,
+  accountActivation,
   loginUser,
   getUsers,
   getUsersError,
-  getProfile,
+  currentUser,
   deleteUsers,
   updateUser,
 };
