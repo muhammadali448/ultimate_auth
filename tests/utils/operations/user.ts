@@ -2,12 +2,7 @@ import { gql } from "@apollo/client";
 const createUser = gql`
   mutation($data: signupInput!) {
     signup(signupInput: $data) {
-      user {
-        id
-        name
-        email
-      }
-      token
+      message
     }
   }
 `;
@@ -15,6 +10,12 @@ const loginUser = gql`
   mutation($data: loginInput!) {
     login(loginInput: $data) {
       token
+      user {
+        id
+        name
+        email
+        isAdmin
+      }
     }
   }
 `;
@@ -24,6 +25,7 @@ const getUsers = gql`
       id
       name
       email
+      isAdmin
     }
   }
 `;
@@ -38,18 +40,19 @@ const getUsersError = gql`
 `;
 const getProfile = gql`
   query {
-    myProfile {
+    createUser {
       id
       name
       email
+      isAdmin
     }
   }
 `;
 
-const deleteUser = gql`
-  mutation($id: ID!) {
-    deleteUser(id: $id) {
-      id
+const deleteUsers = gql`
+  mutation($ids: DeleteUserInput!) {
+    deleteUser(ids: $ids) {
+      message
     }
   }
 `;
@@ -59,10 +62,26 @@ const updateUser = gql`
     updateUser(updateUserInput: $data) {
       id
       name
-      password
+      email
+      isAdmin
     }
   }
 `;
 
+const accountActivation = gql`
+  mutation {
+    accountActivation(token: String!) {
+      message
+    }
+  }
+`;
 
-export { createUser, loginUser, getUsers, getUsersError, getProfile, deleteUser, updateUser };
+export {
+  createUser,
+  loginUser,
+  getUsers,
+  getUsersError,
+  getProfile,
+  deleteUsers,
+  updateUser,
+};
