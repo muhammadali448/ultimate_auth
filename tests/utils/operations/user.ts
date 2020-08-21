@@ -75,6 +75,21 @@ const accountActivation = gql`
     }
   }
 `;
+const forgotPassword = gql`
+  mutation($email: String!) {
+    forgotPassword(email: $email) {
+      message
+    }
+  }
+`;
+
+const resetPassword = gql`
+  mutation($data: resetPasswordInput!) {
+    resetPassword(resetPasswordInput: $data) {
+      message
+    }
+  }
+`;
 
 export {
   createUser,
@@ -84,5 +99,7 @@ export {
   getUsersError,
   currentUser,
   deleteUsers,
+  forgotPassword,
+  resetPassword,
   updateUser,
 };

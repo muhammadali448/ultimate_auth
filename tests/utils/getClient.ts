@@ -1,5 +1,5 @@
-import "cross-fetch"
-import * as fetch from 'cross-fetch'
+import "cross-fetch";
+import * as fetch from "cross-fetch";
 
 import {
   ApolloClient,
@@ -10,7 +10,7 @@ import {
   Observable,
   ApolloLink,
 } from "@apollo/client";
-import * as ws from 'ws';
+import * as ws from "ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { onError } from "@apollo/client/link/error";
 import { WebSocketLink } from "@apollo/client/link/ws";
@@ -56,36 +56,36 @@ const getClient = (
   });
 
   // Web socket link for subscriptions
-  const wsLink = from([
-    onError(({ graphQLErrors, networkError }) => {
-      if (graphQLErrors) {
-        graphQLErrors.map(({ message, locations, path }) =>
-          console.log(
-            `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-          )
-        );
-      }
+  // const wsLink = from([
+  //   onError(({ graphQLErrors, networkError }) => {
+  //     if (graphQLErrors) {
+  //       graphQLErrors.map(({ message, locations, path }) =>
+  //         console.log(
+  //           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+  //         )
+  //       );
+  //     }
 
-      if (networkError) {
-        console.log(`[Network error]: ${networkError}`);
-      }
-    }),
-    requestLink,
-    new WebSocketLink({
-      uri: websocketURL,
-      options: {
-        reconnect: true,
-        connectionParams: () => {
-          if (jwt) {
-            return {
-              Authorization: `Bearer ${jwt}`,
-            };
-          }
-        },
-      },
-      webSocketImpl: ws
-    }),
-  ]);
+  //     if (networkError) {
+  //       console.log(`[Network error]: ${networkError}`);
+  //     }
+  //   }),
+  //   requestLink,
+  //   new WebSocketLink({
+  //     uri: websocketURL,
+  //     options: {
+  //       reconnect: true,
+  //       connectionParams: () => {
+  //         if (jwt) {
+  //           return {
+  //             Authorization: `Bearer ${jwt}`,
+  //           };
+  //         }
+  //       },
+  //     },
+  //     webSocketImpl: ws
+  //   }),
+  // ]);
 
   // HTTP link for queries and mutations
   const httpLink = from([
@@ -112,20 +112,20 @@ const getClient = (
   interface Definintion {
     kind: string;
     operation?: string;
-  };
+  }
   // Link to direct ws and http traffic to the correct place
-  const link = split(
-    // Pick which links get the data based on the operation kind
-    ({ query }) => {
-      const { kind, operation }: Definintion = getMainDefinition(query);
-      return kind === "OperationDefinition" && operation === "subscription";
-    },
-    wsLink,
-    httpLink
-  );
+  // const link = split(
+  //   // Pick which links get the data based on the operation kind
+  //   ({ query }) => {
+  //     const { kind, operation }: Definintion = getMainDefinition(query);
+  //     return kind === "OperationDefinition" && operation === "subscription";
+  //   },
+  //   // wsLink,
+  //   httpLink
+  // );
 
   return new ApolloClient({
-    link,
+    link: httpLink,
     cache: new InMemoryCache(),
   });
 };

@@ -2,7 +2,7 @@
   "name": "ultimate_auth",
   "scripts": {
     "dev": "env-cmd -f ./config/dev.env ts-node-dev --no-notify --respawn --transpileOnly ./src",
-    "dev-test": "env-cmd -f ./config/test.env jest --watchAll --silent --verbose --runInBand --coverage",
+    "dev-test": "env-cmd -f ./config/test.env jest --watchAll --verbose --runInBand --coverage",
     "test": "jest --silent --verbose --runInBand --coverage",
     "prisma-dev": "prisma deploy -e ./config/dev.env",
     "prisma-test": "prisma deploy -e ./config/test.env",

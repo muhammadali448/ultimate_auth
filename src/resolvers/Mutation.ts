@@ -59,9 +59,6 @@ export const Mutation = mutationType({
             throw new Error("No token for activation");
           }
           const decoded = verify(token, process.env.JWT_ACCOUNT_ACTIVATION);
-          if (!decoded) {
-            throw new Error("Expired link. Signup again");
-          }
           const { name, email, password } = decode(token) as {
             name: string;
             email: string;
@@ -98,13 +95,7 @@ export const Mutation = mutationType({
           if (!resetPasswordLink) {
             throw new Error("No reset link found");
           }
-          const decoded = verify(
-            resetPasswordLink,
-            process.env.JWT_RESET_PASSWORD
-          );
-          if (!decoded) {
-            throw new Error("Expired link. Try again");
-          }
+          verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD);
           const user = await ctx.prisma.users({
             where: {
               resetPasswordLink,

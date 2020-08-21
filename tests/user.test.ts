@@ -9,11 +9,13 @@ import {
   currentUser,
   getUsers,
   deleteUsers,
+  forgotPassword,
   updateUser,
   getUsersError,
+  resetPassword,
 } from "./utils/operations/user";
 import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 const client = getClient();
 
 describe("Users Test Cases", () => {
@@ -74,10 +76,10 @@ describe("Users Test Cases", () => {
       })
     ).rejects.toThrow();
   });
-  test("should not activate a new user account if token is expire", async () => {
+  test("should not activate a new user account if token is expired", async () => {
     const variables = {
       token: sign({ name: "megan" }, process.env.JWT_ACCOUNT_ACTIVATION, {
-        expiresIn: "1s",
+        expiresIn: 0,
       }),
     };
     expect(
@@ -171,6 +173,7 @@ describe("Users Test Cases", () => {
     const variables = {
       data: {
         name: "John Wick",
+        email: "johnwick222@gmail.com",
       },
     };
     const response = await client.mutate({
@@ -178,6 +181,18 @@ describe("Users Test Cases", () => {
       variables,
     });
     expect(response.data.updateUser.name).toBe(variables.data.name);
+  });
+  test("should not update a user if no field is provided", async () => {
+    const client = getClient(user1.jwt);
+    const variables = {
+      data: {},
+    };
+    expect(
+      client.mutate({
+        mutation: updateUser,
+        variables,
+      })
+    ).rejects.toThrow();
   });
   test("should update password of a user", async () => {
     const client = getClient(user1.jwt);
@@ -209,7 +224,83 @@ describe("Users Test Cases", () => {
       })
     ).rejects.toThrow();
   });
-
+  test("should forgotPassword if email is valid", async () => {
+    const variables = {
+      email: user1.inputFields.email,
+    };
+    const { data } = await client.mutate({
+      mutation: forgotPassword,
+      variables,
+    });
+    expect(data.forgotPassword.message).toBe(
+      `Email has been sent to ${
+        user1.inputFields.email
+      }. Follow the instruction to reset your password`
+    );
+  });
+  test("should not resetPassword if resetPasswordLink is not provided", async () => {
+    const variables = {
+      data: {
+        newPassword: "abc12345",
+        resetPasswordLink: "",
+      },
+    };
+    expect(
+      client.mutate({
+        mutation: resetPassword,
+        variables,
+      })
+    ).rejects.toThrow();
+  });
+  test("should not resetPassword if user not exist", async () => {
+    const variables = {
+      data: {
+        newPassword: "abc12345",
+        resetPasswordLink: sign(
+          {
+            _id: "a1",
+            name: "abc",
+          },
+          process.env.JWT_RESET_PASSWORD,
+          {
+            expiresIn: "10m",
+          }
+        ),
+      },
+    };
+    expect(
+      client.mutate({
+        mutation: resetPassword,
+        variables,
+      })
+    ).rejects.toThrow();
+  });
+  test("should resetPassword if token is valid and provided", async () => {
+    const variables = {
+      data: {
+        newPassword: "abc12345",
+        resetPasswordLink: user1.resetPasswordLink,
+      },
+    };
+    const { data } = await client.mutate({
+      mutation: resetPassword,
+      variables,
+    });
+    expect(data.resetPassword.message).toBe(
+      "Great! Now you can login with your new password"
+    );
+  });
+  test("should not forgotPassword if email is not belongs to any user", async () => {
+    const variables = {
+      email: "abc123@gmail.com",
+    };
+    expect(
+      client.mutate({
+        mutation: forgotPassword,
+        variables,
+      })
+    ).rejects.toThrow();
+  });
   test("should login with bad credentials", async () => {
     const variables = {
       data: { email: "hello222@gmail.com", password: "hello22222" },
@@ -245,5 +336,9 @@ describe("Users Test Cases", () => {
   test("should give error if graphql have an error", async () => {
     const client = getClient(user1.jwt);
     expect(client.query({ query: getUsersError })).rejects.toThrow();
+  });
+  test("should give error if network have an error", async () => {
+    const client = getClient(user1.jwt, "abcd");
+    expect(client.query({ query: currentUser })).rejects.toThrow();
   });
 });

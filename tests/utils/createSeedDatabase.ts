@@ -11,6 +11,7 @@ const user1 = {
   user: undefined as any,
   jwt: undefined as string,
   token: undefined as string,
+  resetPasswordLink: undefined as string,
 };
 
 const user2 = {
@@ -25,7 +26,7 @@ const user2 = {
 };
 
 const createSeedDatabase = async () => {
-  jest.setTimeout(10000);
+  // jest.setTimeout(10000);
   await prisma.deleteManyUsers();
 
   user1.user = await prisma.createUser({
@@ -54,6 +55,23 @@ const createSeedDatabase = async () => {
       expiresIn: "10m",
     }
   );
+  user1.resetPasswordLink = (await prisma.updateUser({
+    data: {
+      resetPasswordLink: sign(
+        {
+          _id: user1.user.id,
+          name: user1.inputFields.name,
+        },
+        process.env.JWT_RESET_PASSWORD,
+        {
+          expiresIn: "10m",
+        }
+      ),
+    },
+    where: {
+      id: user1.user.id,
+    },
+  })).resetPasswordLink;
   await prisma.updateUser({
     data: {
       isAdmin: true,
