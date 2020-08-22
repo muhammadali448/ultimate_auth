@@ -15,7 +15,8 @@ import {
   resetPassword,
 } from "./utils/operations/user";
 import { compare } from "bcrypt";
-import { sign, JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
+import mailService from "../src/services/sendEmail";
 const client = getClient();
 
 describe("Users Test Cases", () => {
@@ -340,5 +341,13 @@ describe("Users Test Cases", () => {
   test("should give error if network have an error", async () => {
     const client = getClient(user1.jwt, "abcd");
     expect(client.query({ query: currentUser })).rejects.toThrow();
+  });
+  test("should give error if option are incorrect", async () => {
+    try {
+      await mailService.sendEmail(null, null, null, null);
+    } catch (error) {
+      expect(error.message).toBe("No recipients defined");
+      // console.log("Email Error: ", error.message);
+    }
   });
 });

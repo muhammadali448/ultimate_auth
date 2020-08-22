@@ -4,23 +4,26 @@ import * as fetch from "cross-fetch";
 import {
   ApolloClient,
   InMemoryCache,
-  split,
+  // split,
   HttpLink,
   from,
   Observable,
   ApolloLink,
 } from "@apollo/client";
-import * as ws from "ws";
-import { getMainDefinition } from "@apollo/client/utilities";
+// import * as ws from "ws";
+// import { getMainDefinition } from "@apollo/client/utilities";
 import { onError } from "@apollo/client/link/error";
-import { WebSocketLink } from "@apollo/client/link/ws";
+// import { WebSocketLink } from "@apollo/client/link/ws";
 const getClient = (
   jwt?: string,
-  httpURL = "http://localhost:4000",
-  websocketURL = "ws://localhost:4000"
+  httpURL = "http://localhost:4000"
+  // websocketURL = "ws://localhost:4000"
 ) => {
   // Setup the authorization header for the http client
-  const request = async (operation: any) => {
+  interface OperationType {
+    setContext: (s: { headers: { Authorization: string } }) => void;
+  }
+  const request = async (operation: OperationType) => {
     if (jwt) {
       operation.setContext({
         headers: {
@@ -109,10 +112,10 @@ const getClient = (
     }),
   ]);
 
-  interface Definintion {
-    kind: string;
-    operation?: string;
-  }
+  // interface Definintion {
+  //   kind: string;
+  //   operation?: string;
+  // }
   // Link to direct ws and http traffic to the correct place
   // const link = split(
   //   // Pick which links get the data based on the operation kind
