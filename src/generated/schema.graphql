@@ -11,6 +11,11 @@ input DeleteUserInput {
   id: [ID!]!
 }
 
+input facebookLoginInput {
+  accessToken: String!
+  userId: String!
+}
+
 input loginInput {
   email: String!
   password: String!
@@ -23,6 +28,7 @@ type MessagePayload {
 type Mutation {
   accountActivation(token: String!): MessagePayload!
   deleteUsers(ids: DeleteUserInput!): MessagePayload!
+  facebookLogin(facebookLoginInput: facebookLoginInput!): AuthPayload!
   forgotPassword(email: String!): MessagePayload!
   login(loginInput: loginInput!): AuthPayload!
   resetPassword(resetPasswordInput: resetPasswordInput!): MessagePayload!

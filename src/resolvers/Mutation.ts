@@ -1,13 +1,62 @@
-import { mutationType, arg, stringArg, idArg } from "nexus";
+import { mutationType, arg, stringArg } from "nexus";
 import generateHashPassword from "../utils/generateHashPassword";
 import generateToken from "../utils/generateToken";
 import mailService from "../services/sendEmail";
 import { compare } from "bcrypt";
 import { sign, decode, verify } from "jsonwebtoken";
 import { getUserId } from "../utils/getUserId";
-
+import fetch from "node-fetch";
 export const Mutation = mutationType({
   definition(t) {
+    t.field("facebookLogin", {
+      type: "AuthPayload",
+      nullable: false,
+      args: {
+        facebookLoginInput: arg({ type: "facebookLoginInput", required: true }),
+      },
+      resolve: async (
+        _,
+        { facebookLoginInput: { userId, accessToken } },
+        ctx
+      ) => {
+        try {
+          const url = `https://graph.facebook.com/v2.11/${userId}/?fields=id,name,email&access_token=${accessToken}`;
+          const response = await fetch(url, {
+            method: "GET",
+          });
+          const data = (await response.json()) as {
+            name: string;
+            email: string;
+            // error: {
+            //   message: string;
+            // };
+          };
+          if (response.status !== 200) {
+            throw new Error("Something went wrong");
+          }
+          const { email, name } = data;
+          const user = await ctx.prisma.user({
+            email,
+          });
+          if (!user) {
+            const newUser = await ctx.prisma.createUser({
+              name,
+              email,
+            });
+            return {
+              user: newUser,
+              token: generateToken(newUser.id),
+            };
+          }
+          return {
+            user,
+            token: generateToken(user.id),
+          };
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+    });
     t.field("signup", {
       type: "MessagePayload",
       nullable: false,
