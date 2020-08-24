@@ -23,6 +23,9 @@ export interface NexusGenInputs {
     accessToken: string; // String!
     userId: string; // String!
   }
+  googleLoginInput: { // input type
+    idToken: string; // String!
+  }
   loginInput: { // input type
     email: string; // String!
     password: string; // String!
@@ -68,6 +71,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   DeleteUserInput: NexusGenInputs['DeleteUserInput'];
   UpdateUserInput: NexusGenInputs['UpdateUserInput'];
   facebookLoginInput: NexusGenInputs['facebookLoginInput'];
+  googleLoginInput: NexusGenInputs['googleLoginInput'];
   loginInput: NexusGenInputs['loginInput'];
   resetPasswordInput: NexusGenInputs['resetPasswordInput'];
   signupInput: NexusGenInputs['signupInput'];
@@ -86,6 +90,7 @@ export interface NexusGenFieldTypes {
     deleteUsers: NexusGenRootTypes['MessagePayload']; // MessagePayload!
     facebookLogin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     forgotPassword: NexusGenRootTypes['MessagePayload']; // MessagePayload!
+    googleLogin: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     resetPassword: NexusGenRootTypes['MessagePayload']; // MessagePayload!
     signup: NexusGenRootTypes['MessagePayload']; // MessagePayload!
@@ -117,6 +122,9 @@ export interface NexusGenArgTypes {
     forgotPassword: { // args
       email: string; // String!
     }
+    googleLogin: { // args
+      googleLoginInput: NexusGenInputs['googleLoginInput']; // googleLoginInput!
+    }
     login: { // args
       loginInput: NexusGenInputs['loginInput']; // loginInput!
     }
@@ -144,7 +152,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "AuthPayload" | "MessagePayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "DeleteUserInput" | "UpdateUserInput" | "facebookLoginInput" | "loginInput" | "resetPasswordInput" | "signupInput";
+export type NexusGenInputNames = "DeleteUserInput" | "UpdateUserInput" | "facebookLoginInput" | "googleLoginInput" | "loginInput" | "resetPasswordInput" | "signupInput";
 
 export type NexusGenEnumNames = never;
 

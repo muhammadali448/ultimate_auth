@@ -16,6 +16,10 @@ input facebookLoginInput {
   userId: String!
 }
 
+input googleLoginInput {
+  idToken: String!
+}
+
 input loginInput {
   email: String!
   password: String!
@@ -30,6 +34,7 @@ type Mutation {
   deleteUsers(ids: DeleteUserInput!): MessagePayload!
   facebookLogin(facebookLoginInput: facebookLoginInput!): AuthPayload!
   forgotPassword(email: String!): MessagePayload!
+  googleLogin(googleLoginInput: googleLoginInput!): AuthPayload!
   login(loginInput: loginInput!): AuthPayload!
   resetPassword(resetPasswordInput: resetPasswordInput!): MessagePayload!
   signup(signupInput: signupInput!): MessagePayload!

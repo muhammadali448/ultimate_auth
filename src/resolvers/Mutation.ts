@@ -3,11 +3,49 @@ import generateHashPassword from "../utils/generateHashPassword";
 import generateToken from "../utils/generateToken";
 import mailService from "../services/sendEmail";
 import { compare } from "bcrypt";
+import { OAuth2Client } from "google-auth-library";
 import { sign, decode, verify } from "jsonwebtoken";
 import { getUserId } from "../utils/getUserId";
 import fetch from "node-fetch";
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 export const Mutation = mutationType({
   definition(t) {
+    t.field("googleLogin", {
+      type: "AuthPayload",
+      nullable: false,
+      args: {
+        googleLoginInput: arg({ type: "googleLoginInput", required: true }),
+      },
+      resolve: async (_, { googleLoginInput: { idToken } }, ctx) => {
+        try {
+          const { email_verified, email, name } = (await client.verifyIdToken({
+            idToken,
+            audience: process.env.GOOGLE_CLIENT_ID,
+          })).getPayload();
+          if (email_verified) {
+            const user = await ctx.prisma.user({
+              email,
+            });
+            if (!user) {
+              const newUser = await ctx.prisma.createUser({
+                name,
+                email,
+              });
+              return {
+                user: newUser,
+                token: generateToken(newUser.id),
+              };
+            }
+            return {
+              user,
+              token: generateToken(user.id),
+            };
+          }
+        } catch (error) {
+          throw new Error(error.message);
+        }
+      },
+    });
     t.field("facebookLogin", {
       type: "AuthPayload",
       nullable: false,
