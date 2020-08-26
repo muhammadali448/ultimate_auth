@@ -112,8 +112,8 @@ export type UserOrderByInput =
   | "password_DESC"
   | "isAdmin_ASC"
   | "isAdmin_DESC"
-  | "resetPasswordLink_ASC"
-  | "resetPasswordLink_DESC"
+  | "resetPasswordToken_ASC"
+  | "resetPasswordToken_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -127,7 +127,7 @@ export interface UserCreateInput {
   email: String;
   password?: Maybe<String>;
   isAdmin?: Maybe<Boolean>;
-  resetPasswordLink?: Maybe<String>;
+  resetPasswordToken?: Maybe<String>;
 }
 
 export interface UserWhereInput {
@@ -189,20 +189,20 @@ export interface UserWhereInput {
   password_not_ends_with?: Maybe<String>;
   isAdmin?: Maybe<Boolean>;
   isAdmin_not?: Maybe<Boolean>;
-  resetPasswordLink?: Maybe<String>;
-  resetPasswordLink_not?: Maybe<String>;
-  resetPasswordLink_in?: Maybe<String[] | String>;
-  resetPasswordLink_not_in?: Maybe<String[] | String>;
-  resetPasswordLink_lt?: Maybe<String>;
-  resetPasswordLink_lte?: Maybe<String>;
-  resetPasswordLink_gt?: Maybe<String>;
-  resetPasswordLink_gte?: Maybe<String>;
-  resetPasswordLink_contains?: Maybe<String>;
-  resetPasswordLink_not_contains?: Maybe<String>;
-  resetPasswordLink_starts_with?: Maybe<String>;
-  resetPasswordLink_not_starts_with?: Maybe<String>;
-  resetPasswordLink_ends_with?: Maybe<String>;
-  resetPasswordLink_not_ends_with?: Maybe<String>;
+  resetPasswordToken?: Maybe<String>;
+  resetPasswordToken_not?: Maybe<String>;
+  resetPasswordToken_in?: Maybe<String[] | String>;
+  resetPasswordToken_not_in?: Maybe<String[] | String>;
+  resetPasswordToken_lt?: Maybe<String>;
+  resetPasswordToken_lte?: Maybe<String>;
+  resetPasswordToken_gt?: Maybe<String>;
+  resetPasswordToken_gte?: Maybe<String>;
+  resetPasswordToken_contains?: Maybe<String>;
+  resetPasswordToken_not_contains?: Maybe<String>;
+  resetPasswordToken_starts_with?: Maybe<String>;
+  resetPasswordToken_not_starts_with?: Maybe<String>;
+  resetPasswordToken_ends_with?: Maybe<String>;
+  resetPasswordToken_not_ends_with?: Maybe<String>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -229,7 +229,7 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
   isAdmin?: Maybe<Boolean>;
-  resetPasswordLink?: Maybe<String>;
+  resetPasswordToken?: Maybe<String>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -237,7 +237,7 @@ export interface UserUpdateManyMutationInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
   isAdmin?: Maybe<Boolean>;
-  resetPasswordLink?: Maybe<String>;
+  resetPasswordToken?: Maybe<String>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -283,7 +283,7 @@ export interface UserPreviousValues {
   email: String;
   password?: String;
   isAdmin?: Boolean;
-  resetPasswordLink?: String;
+  resetPasswordToken?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -296,7 +296,7 @@ export interface UserPreviousValuesPromise
   email: () => Promise<String>;
   password: () => Promise<String>;
   isAdmin: () => Promise<Boolean>;
-  resetPasswordLink: () => Promise<String>;
+  resetPasswordToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -309,7 +309,7 @@ export interface UserPreviousValuesSubscription
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   isAdmin: () => Promise<AsyncIterator<Boolean>>;
-  resetPasswordLink: () => Promise<AsyncIterator<String>>;
+  resetPasswordToken: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -400,7 +400,7 @@ export interface User {
   email: String;
   password?: String;
   isAdmin?: Boolean;
-  resetPasswordLink?: String;
+  resetPasswordToken?: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -411,7 +411,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   email: () => Promise<String>;
   password: () => Promise<String>;
   isAdmin: () => Promise<Boolean>;
-  resetPasswordLink: () => Promise<String>;
+  resetPasswordToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -424,7 +424,7 @@ export interface UserSubscription
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   isAdmin: () => Promise<AsyncIterator<Boolean>>;
-  resetPasswordLink: () => Promise<AsyncIterator<String>>;
+  resetPasswordToken: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -437,7 +437,7 @@ export interface UserNullablePromise
   email: () => Promise<String>;
   password: () => Promise<String>;
   isAdmin: () => Promise<Boolean>;
-  resetPasswordLink: () => Promise<String>;
+  resetPasswordToken: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }

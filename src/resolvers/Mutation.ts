@@ -175,17 +175,17 @@ export const Mutation = mutationType({
       },
       resolve: async (
         _,
-        { resetPasswordInput: { resetPasswordLink, newPassword } },
+        { resetPasswordInput: { resetPasswordToken, newPassword } },
         ctx
       ) => {
         try {
-          if (!resetPasswordLink) {
+          if (!resetPasswordToken) {
             throw new Error("No reset link found");
           }
-          verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD);
+          verify(resetPasswordToken, process.env.JWT_RESET_PASSWORD);
           const user = await ctx.prisma.users({
             where: {
-              resetPasswordLink,
+              resetPasswordToken,
             },
           });
           if (!user[0]) {
@@ -198,7 +198,7 @@ export const Mutation = mutationType({
             },
             data: {
               password,
-              resetPasswordLink: "",
+              resetPasswordToken: "",
             },
           });
           return {
@@ -239,7 +239,7 @@ export const Mutation = mutationType({
               id: user.id,
             },
             data: {
-              resetPasswordLink: token,
+              resetPasswordToken: token,
             },
           });
           await mailService.sendEmail(

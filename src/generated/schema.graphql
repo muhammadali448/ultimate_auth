@@ -48,7 +48,7 @@ type Query {
 
 input resetPasswordInput {
   newPassword: String!
-  resetPasswordLink: String!
+  resetPasswordToken: String!
 }
 
 input signupInput {

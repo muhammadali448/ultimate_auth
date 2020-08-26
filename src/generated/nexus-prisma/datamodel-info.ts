@@ -393,7 +393,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "args": [],
             "type": {
@@ -1113,7 +1113,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1123,7 +1123,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_not",
+            "name": "resetPasswordToken_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1133,7 +1133,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_in",
+            "name": "resetPasswordToken_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1151,7 +1151,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_not_in",
+            "name": "resetPasswordToken_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1169,7 +1169,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_lt",
+            "name": "resetPasswordToken_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1179,7 +1179,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_lte",
+            "name": "resetPasswordToken_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1189,7 +1189,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_gt",
+            "name": "resetPasswordToken_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1199,7 +1199,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_gte",
+            "name": "resetPasswordToken_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1209,7 +1209,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_contains",
+            "name": "resetPasswordToken_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1219,7 +1219,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_not_contains",
+            "name": "resetPasswordToken_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1229,7 +1229,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_starts_with",
+            "name": "resetPasswordToken_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1239,7 +1239,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_not_starts_with",
+            "name": "resetPasswordToken_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1249,7 +1249,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_ends_with",
+            "name": "resetPasswordToken_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1259,7 +1259,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink_not_ends_with",
+            "name": "resetPasswordToken_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1588,13 +1588,13 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "resetPasswordLink_ASC",
+            "name": "resetPasswordToken_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "resetPasswordLink_DESC",
+            "name": "resetPasswordToken_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -2165,7 +2165,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2226,7 +2226,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2287,7 +2287,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2689,7 +2689,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "resetPasswordLink",
+            "name": "resetPasswordToken",
             "description": null,
             "args": [],
             "type": {

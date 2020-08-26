@@ -32,7 +32,7 @@ export interface NexusGenInputs {
   }
   resetPasswordInput: { // input type
     newPassword: string; // String!
-    resetPasswordLink: string; // String!
+    resetPasswordToken: string; // String!
   }
   signupInput: { // input type
     email: string; // String!

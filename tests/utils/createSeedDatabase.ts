@@ -11,7 +11,7 @@ const user1 = {
   user: undefined as any,
   jwt: undefined as string,
   token: undefined as string,
-  resetPasswordLink: undefined as string,
+  resetPasswordToken: undefined as string,
 };
 
 const user2 = {
@@ -55,9 +55,9 @@ const createSeedDatabase = async () => {
       expiresIn: "10m",
     }
   );
-  user1.resetPasswordLink = (await prisma.updateUser({
+  user1.resetPasswordToken = (await prisma.updateUser({
     data: {
-      resetPasswordLink: sign(
+      resetPasswordToken: sign(
         {
           _id: user1.user.id,
           name: user1.inputFields.name,
@@ -71,7 +71,7 @@ const createSeedDatabase = async () => {
     where: {
       id: user1.user.id,
     },
-  })).resetPasswordLink;
+  })).resetPasswordToken;
   await prisma.updateUser({
     data: {
       isAdmin: true,

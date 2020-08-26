@@ -142,7 +142,7 @@ type UserObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'isAdmin', args?: [] | false, alias?: string  } 
-  | { name: 'resetPasswordLink', args?: [] | false, alias?: string  } 
+  | { name: 'resetPasswordToken', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -152,7 +152,7 @@ type UserFields =
   | 'email'
   | 'password'
   | 'isAdmin'
-  | 'resetPasswordLink'
+  | 'resetPasswordToken'
   | 'createdAt'
   | 'updatedAt'
 
@@ -201,7 +201,7 @@ export interface UserFieldDetails {
     nullable: true
     resolve: undefined
   }
-  resetPasswordLink: {
+  resetPasswordToken: {
     type: 'String'
     args: {}
     description: string
@@ -663,7 +663,7 @@ type UserPreviousValuesObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'password', args?: [] | false, alias?: string  } 
   | { name: 'isAdmin', args?: [] | false, alias?: string  } 
-  | { name: 'resetPasswordLink', args?: [] | false, alias?: string  } 
+  | { name: 'resetPasswordToken', args?: [] | false, alias?: string  } 
   | { name: 'createdAt', args?: [] | false, alias?: string  } 
   | { name: 'updatedAt', args?: [] | false, alias?: string  } 
 
@@ -673,7 +673,7 @@ type UserPreviousValuesFields =
   | 'email'
   | 'password'
   | 'isAdmin'
-  | 'resetPasswordLink'
+  | 'resetPasswordToken'
   | 'createdAt'
   | 'updatedAt'
 
@@ -722,7 +722,7 @@ export interface UserPreviousValuesFieldDetails {
     nullable: true
     resolve: undefined
   }
-  resetPasswordLink: {
+  resetPasswordToken: {
     type: 'String'
     args: {}
     description: string
@@ -818,20 +818,20 @@ export interface UserWhereInput {
   password_not_ends_with?: string | null
   isAdmin?: boolean | null
   isAdmin_not?: boolean | null
-  resetPasswordLink?: string | null
-  resetPasswordLink_not?: string | null
-  resetPasswordLink_in?: string[]
-  resetPasswordLink_not_in?: string[]
-  resetPasswordLink_lt?: string | null
-  resetPasswordLink_lte?: string | null
-  resetPasswordLink_gt?: string | null
-  resetPasswordLink_gte?: string | null
-  resetPasswordLink_contains?: string | null
-  resetPasswordLink_not_contains?: string | null
-  resetPasswordLink_starts_with?: string | null
-  resetPasswordLink_not_starts_with?: string | null
-  resetPasswordLink_ends_with?: string | null
-  resetPasswordLink_not_ends_with?: string | null
+  resetPasswordToken?: string | null
+  resetPasswordToken_not?: string | null
+  resetPasswordToken_in?: string[]
+  resetPasswordToken_not_in?: string[]
+  resetPasswordToken_lt?: string | null
+  resetPasswordToken_lte?: string | null
+  resetPasswordToken_gt?: string | null
+  resetPasswordToken_gte?: string | null
+  resetPasswordToken_contains?: string | null
+  resetPasswordToken_not_contains?: string | null
+  resetPasswordToken_starts_with?: string | null
+  resetPasswordToken_not_starts_with?: string | null
+  resetPasswordToken_ends_with?: string | null
+  resetPasswordToken_not_ends_with?: string | null
   createdAt?: string | null
   createdAt_not?: string | null
   createdAt_in?: string[]
@@ -912,20 +912,20 @@ export type UserWhereInputInputObject =
   | { name: 'password_not_ends_with', alias?: string  } 
   | { name: 'isAdmin', alias?: string  } 
   | { name: 'isAdmin_not', alias?: string  } 
-  | { name: 'resetPasswordLink', alias?: string  } 
-  | { name: 'resetPasswordLink_not', alias?: string  } 
-  | { name: 'resetPasswordLink_in', alias?: string  } 
-  | { name: 'resetPasswordLink_not_in', alias?: string  } 
-  | { name: 'resetPasswordLink_lt', alias?: string  } 
-  | { name: 'resetPasswordLink_lte', alias?: string  } 
-  | { name: 'resetPasswordLink_gt', alias?: string  } 
-  | { name: 'resetPasswordLink_gte', alias?: string  } 
-  | { name: 'resetPasswordLink_contains', alias?: string  } 
-  | { name: 'resetPasswordLink_not_contains', alias?: string  } 
-  | { name: 'resetPasswordLink_starts_with', alias?: string  } 
-  | { name: 'resetPasswordLink_not_starts_with', alias?: string  } 
-  | { name: 'resetPasswordLink_ends_with', alias?: string  } 
-  | { name: 'resetPasswordLink_not_ends_with', alias?: string  } 
+  | { name: 'resetPasswordToken', alias?: string  } 
+  | { name: 'resetPasswordToken_not', alias?: string  } 
+  | { name: 'resetPasswordToken_in', alias?: string  } 
+  | { name: 'resetPasswordToken_not_in', alias?: string  } 
+  | { name: 'resetPasswordToken_lt', alias?: string  } 
+  | { name: 'resetPasswordToken_lte', alias?: string  } 
+  | { name: 'resetPasswordToken_gt', alias?: string  } 
+  | { name: 'resetPasswordToken_gte', alias?: string  } 
+  | { name: 'resetPasswordToken_contains', alias?: string  } 
+  | { name: 'resetPasswordToken_not_contains', alias?: string  } 
+  | { name: 'resetPasswordToken_starts_with', alias?: string  } 
+  | { name: 'resetPasswordToken_not_starts_with', alias?: string  } 
+  | { name: 'resetPasswordToken_ends_with', alias?: string  } 
+  | { name: 'resetPasswordToken_not_ends_with', alias?: string  } 
   | { name: 'createdAt', alias?: string  } 
   | { name: 'createdAt_not', alias?: string  } 
   | { name: 'createdAt_in', alias?: string  } 
@@ -952,7 +952,7 @@ export interface UserCreateInput {
   email?: string
   password?: string | null
   isAdmin?: boolean | null
-  resetPasswordLink?: string | null
+  resetPasswordToken?: string | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
@@ -961,14 +961,14 @@ export type UserCreateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'isAdmin', alias?: string  } 
-  | { name: 'resetPasswordLink', alias?: string  } 
+  | { name: 'resetPasswordToken', alias?: string  } 
   
 export interface UserUpdateInput {
   name?: string | null
   email?: string | null
   password?: string | null
   isAdmin?: boolean | null
-  resetPasswordLink?: string | null
+  resetPasswordToken?: string | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
@@ -976,14 +976,14 @@ export type UserUpdateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'isAdmin', alias?: string  } 
-  | { name: 'resetPasswordLink', alias?: string  } 
+  | { name: 'resetPasswordToken', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   name?: string | null
   email?: string | null
   password?: string | null
   isAdmin?: boolean | null
-  resetPasswordLink?: string | null
+  resetPasswordToken?: string | null
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
@@ -991,7 +991,7 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'password', alias?: string  } 
   | { name: 'isAdmin', alias?: string  } 
-  | { name: 'resetPasswordLink', alias?: string  } 
+  | { name: 'resetPasswordToken', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -1026,8 +1026,8 @@ export type UserOrderByInputValues =
   | 'password_DESC'
   | 'isAdmin_ASC'
   | 'isAdmin_DESC'
-  | 'resetPasswordLink_ASC'
-  | 'resetPasswordLink_DESC'
+  | 'resetPasswordToken_ASC'
+  | 'resetPasswordToken_DESC'
   | 'createdAt_ASC'
   | 'createdAt_DESC'
   | 'updatedAt_ASC'

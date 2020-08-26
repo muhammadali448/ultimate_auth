@@ -57,7 +57,7 @@ type User {
   email: String!
   password: String
   isAdmin: Boolean
-  resetPasswordLink: String
+  resetPasswordToken: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -74,7 +74,7 @@ input UserCreateInput {
   email: String!
   password: String
   isAdmin: Boolean
-  resetPasswordLink: String
+  resetPasswordToken: String
 }
 
 type UserEdge {
@@ -93,8 +93,8 @@ enum UserOrderByInput {
   password_DESC
   isAdmin_ASC
   isAdmin_DESC
-  resetPasswordLink_ASC
-  resetPasswordLink_DESC
+  resetPasswordToken_ASC
+  resetPasswordToken_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -107,7 +107,7 @@ type UserPreviousValues {
   email: String!
   password: String
   isAdmin: Boolean
-  resetPasswordLink: String
+  resetPasswordToken: String
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -135,7 +135,7 @@ input UserUpdateInput {
   email: String
   password: String
   isAdmin: Boolean
-  resetPasswordLink: String
+  resetPasswordToken: String
 }
 
 input UserUpdateManyMutationInput {
@@ -143,7 +143,7 @@ input UserUpdateManyMutationInput {
   email: String
   password: String
   isAdmin: Boolean
-  resetPasswordLink: String
+  resetPasswordToken: String
 }
 
 input UserWhereInput {
@@ -205,20 +205,20 @@ input UserWhereInput {
   password_not_ends_with: String
   isAdmin: Boolean
   isAdmin_not: Boolean
-  resetPasswordLink: String
-  resetPasswordLink_not: String
-  resetPasswordLink_in: [String!]
-  resetPasswordLink_not_in: [String!]
-  resetPasswordLink_lt: String
-  resetPasswordLink_lte: String
-  resetPasswordLink_gt: String
-  resetPasswordLink_gte: String
-  resetPasswordLink_contains: String
-  resetPasswordLink_not_contains: String
-  resetPasswordLink_starts_with: String
-  resetPasswordLink_not_starts_with: String
-  resetPasswordLink_ends_with: String
-  resetPasswordLink_not_ends_with: String
+  resetPasswordToken: String
+  resetPasswordToken_not: String
+  resetPasswordToken_in: [String!]
+  resetPasswordToken_not_in: [String!]
+  resetPasswordToken_lt: String
+  resetPasswordToken_lte: String
+  resetPasswordToken_gt: String
+  resetPasswordToken_gte: String
+  resetPasswordToken_contains: String
+  resetPasswordToken_not_contains: String
+  resetPasswordToken_starts_with: String
+  resetPasswordToken_not_starts_with: String
+  resetPasswordToken_ends_with: String
+  resetPasswordToken_not_ends_with: String
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

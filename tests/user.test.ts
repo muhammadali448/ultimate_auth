@@ -239,11 +239,11 @@ describe("Users Test Cases", () => {
       }. Follow the instruction to reset your password`
     );
   });
-  test("should not resetPassword if resetPasswordLink is not provided", async () => {
+  test("should not resetPassword if resetPasswordToken is not provided", async () => {
     const variables = {
       data: {
         newPassword: "abc12345",
-        resetPasswordLink: "",
+        resetPasswordToken: "",
       },
     };
     expect(
@@ -257,7 +257,7 @@ describe("Users Test Cases", () => {
     const variables = {
       data: {
         newPassword: "abc12345",
-        resetPasswordLink: sign(
+        resetPasswordToken: sign(
           {
             _id: "a1",
             name: "abc",
@@ -280,7 +280,7 @@ describe("Users Test Cases", () => {
     const variables = {
       data: {
         newPassword: "abc12345",
-        resetPasswordLink: user1.resetPasswordLink,
+        resetPasswordToken: user1.resetPasswordToken,
       },
     };
     const { data } = await client.mutate({
