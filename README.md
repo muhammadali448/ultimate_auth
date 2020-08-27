@@ -1,6 +1,6 @@
 # Ultimate Authentication using GraphQL_NEXUS 
 
-This example shows how to implement authenticationu using a **Nexus prisma v1 with typescript**
+This example shows how to implement authentication using a **Nexus prisma v1 with typescript**
 
 ## Features
 ~~~
@@ -29,14 +29,14 @@ yarn prisma-dev
 yarn prisma-test
 ```
 
-## Start the postgre and prisma service
+## Start the postgres and prisma service
 You have docker install to run it.
 
 ```
 sudo docker-compose up -d
 ```
 
-## Start testing using jest 
+## Run test cases 
 ```
 yarn dev-test
 ```
