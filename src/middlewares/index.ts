@@ -1,4 +1,4 @@
-import { rule, shield, and } from "graphql-shield";
+import { rule, shield } from "graphql-shield";
 import { getUserId } from "../utils/getUserId";
 import { Context } from "../types";
 
@@ -19,9 +19,9 @@ const rules = {
 export const middlewares = shield({
   Query: {
     currentUser: rules.isAuthenticatedUser,
-    allUsers: and(rules.isAuthenticatedUser, rules.isAdmin),
+    allUsers: rules.isAdmin,
   },
   Mutation: {
-    deleteUsers: and(rules.isAuthenticatedUser, rules.isAdmin),
+    deleteUsers: rules.isAdmin,
   },
 });
